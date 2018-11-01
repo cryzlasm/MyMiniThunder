@@ -1,5 +1,5 @@
 #pragma once
-#include "xldl.h"
+#include "./xldl.h"
 
 #define DEF_DETOUR_FUNC( func, returntype, ...) typedef returntype ( * fn_##func )(##__VA_ARGS__); fn_##func m_##func;
 

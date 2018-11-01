@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+*build*
+*Bak*
+MyMiniThunder/MyMiniThunder1
+MyMiniThunder/MyMiniThunder/Debug/
+MyMiniThunder/MyMiniThunder/GeneratedFiles/
+MyMiniThunder/Win32/
