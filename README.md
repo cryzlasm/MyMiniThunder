@@ -39,12 +39,17 @@ Ref:
 
 # 更新日志
 
-* v0.3
-    * Todo
-* v0.2
-    * Todo
 * v0.1
     * 基于__*MiniThunder *__项目, 转换原作者MFC项目到QT项目
+    * [x] 完成UI
+    
+
+![image.png | left | 677x309](https://cdn.nlark.com/yuque/0/2018/png/172196/1541053879676-d7e75709-60a0-4437-94a0-76d18f393f56.png "")
+
+    * [ ] 完成库文件调用
+    * [ ] 完成文件下载功能
+
+
 
 ---
 
