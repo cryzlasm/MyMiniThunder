@@ -1,5 +1,5 @@
 # 声明
-<span data-type="color" style="color:rgb(51, 51, 51)">遵循开源许可证 [</span><span data-type="color" style="color:rgb(211, 54, 130)">__MIT__</span><span data-type="color" style="color:rgb(51, 51, 51)">] </span>
+<span data-type="color" style="color:rgb(51, 51, 51)">遵循开源许可证 [</span><span data-type="color" style="color:rgb(211, 54, 130)">__</span><span data-type="color" style="color:rgb(34, 34, 34)"><span data-type="background" style="background-color:rgb(255, 255, 255)">BSD-3-Clause</span></span><span data-type="color" style="color:rgb(211, 54, 130)">__</span><span data-type="color" style="color:rgb(51, 51, 51)">] </span>
 <span data-type="color" style="color:rgb(51, 51, 51)">项目基于&quot;迅雷开放下载引擎&quot; , 仅仅是增加一个界面显示工作, 一切解释权归&quot;迅雷公司&quot;所有.</span>
 
 
@@ -65,5 +65,5 @@ Todo
 ---
 
 # __License__
-[BSD3 ](https://raw.githubusercontent.com/cryzlasm/LICENSE/master/LICENSE%20-%20BSD%203)
+[BSD-3-Clause](https://raw.githubusercontent.com/cryzlasm/LICENSE/master/LICENSE%20-%20BSD%203)
  
