@@ -1,5 +1,6 @@
+
 # 声明
-<span data-type="color" style="color:rgb(51, 51, 51)">遵循开源许可证 [</span><span data-type="color" style="color:rgb(211, 54, 130)">__</span><span data-type="color" style="color:rgb(34, 34, 34)"><span data-type="background" style="background-color:rgb(255, 255, 255)">BSD-3-Clause</span></span><span data-type="color" style="color:rgb(211, 54, 130)">__</span><span data-type="color" style="color:rgb(51, 51, 51)">] </span>
+<span data-type="color" style="color:rgb(51, 51, 51)">遵循开源许可证 [ </span><span data-type="color" style="color:rgb(34, 34, 34)"><span data-type="background" style="background-color:rgb(255, 255, 255)"><strong>BSD-3-Clause</strong></span></span><span data-type="color" style="color:rgb(34, 34, 34)"><span data-type="background" style="background-color:rgb(255, 255, 255)"> </span></span><span data-type="color" style="color:rgb(51, 51, 51)">] </span>
 <span data-type="color" style="color:rgb(51, 51, 51)">项目基于&quot;迅雷开放下载引擎&quot; , 仅仅是增加一个界面显示工作, 一切解释权归&quot;迅雷公司&quot;所有.</span>
 
 
@@ -43,7 +44,14 @@ Ref:
     * 基于__*MiniThunder *__项目, 转换原作者MFC项目到QT项目
     * [x] 完成UI
     * [x] 完成库文件的适配
-    * [ ] 完成文件下载功能
+    * [x] 完成单文件下载功能
+    * [x] 完成常规任务链接下载 (http | https | ftp 等)
+        * [ ] 暂停下载功能
+        * [ ] 停止下载功能
+        * [ ] 完成迅雷专有链接下载 (thunder:// 等)
+        * [ ] 完成迅雷BT文件下载 (种子文件, ed2k://等)
+             
+            
 
 
 
@@ -51,7 +59,12 @@ Ref:
 
 # 项目遇到的问题
 
-Todo
+BT相关:
+* [ ] 已经使用了BT下载API, 但无法下载BT文件, 暂未知问题所在
+* [ ] 如何使用 `ED2K` 下载功能 
+    可能以上问题的关键为 `XL_CreateBTTaskByThunder` 这个API的原因:
+ 此API 好像是拉起迅雷创建BT任务, 并非在开放引擎中创建BT任务, 
+ 暂未找到好的替代方案 
 
 
 ---
@@ -59,7 +72,15 @@ Todo
 # 界面演示
 
 
-![image.png | left | 677x309](https://cdn.nlark.com/yuque/0/2018/png/172196/1541053879676-d7e75709-60a0-4437-94a0-76d18f393f56.png "")
+![image.png | left | 696x318](https://cdn.nlark.com/yuque/0/2018/png/172196/1541409445962-72da9a4d-e36e-4700-b059-1a55e70d6349.png "")
+
+
+
+![image.png | left | 696x318](https://cdn.nlark.com/yuque/0/2018/png/172196/1541409336154-bd4beeac-6413-4952-8b94-abe6b99b7bcf.png "")
+
+
+
+![image.png | left | 696x318](https://cdn.nlark.com/yuque/0/2018/png/172196/1541409430400-dd3d1cd0-1112-4b35-81b6-6779c49069e6.png "")
 
 
 ---

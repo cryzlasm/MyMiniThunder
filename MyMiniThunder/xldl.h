@@ -1,4 +1,19 @@
+﻿/** 
+* @license          : MIT
+* @projectName      : MyMiniThunder 
+* @fileName         : DownWrapper.h
+* @author           : Yzl
+* @makeFileDate     : 2018-11-03 
+* @lastModify       : // 最后修改
+* @brief            : 全文使用Unicode编码, 不支持Ansi编码编辑项目, 
+*                     项目基于 https://github.com/intlinfo/MiniThunder 
+*/
+
 #pragma once
+
+#ifndef UNICODE
+#define UNICODE
+#endif
 
 #ifdef WIN32
 #include <WinSock2.h>
@@ -138,29 +153,57 @@ namespace DownEngine
     /*struct WSAPROTOCOL_INFOW;*/
     
     #pragma pack(pop)
-    
-    namespace DownEngine
-    {
-        extern "C" __declspec(dllimport) BOOL   XL_Init(void);
-        extern "C" __declspec(dllimport) BOOL   XL_UnInit(void);
-        extern "C" __declspec(dllimport) HANDLE XL_CreateTask(DownTaskParam &stParam);
-        extern "C" __declspec(dllimport) BOOL   XL_DeleteTask(HANDLE hTask);
-        extern "C" __declspec(dllimport) BOOL   XL_StartTask(HANDLE hTask);
-        extern "C" __declspec(dllimport) BOOL   XL_StopTask(HANDLE hTask);
-        extern "C" __declspec(dllimport) BOOL   XL_ForceStopTask(HANDLE hTask);
-        extern "C" __declspec(dllimport) BOOL   XL_QueryTaskInfo(HANDLE hTask, DownTaskInfo & stTaskInfo); //旧版接口，使用Ex接口替换
-        extern "C" __declspec(dllimport) BOOL   XL_QueryTaskInfoEx(HANDLE hTask, DownTaskInfo & stTaskInfo);
-        extern "C" __declspec(dllimport) BOOL   XL_DelTempFile(DownTaskParam &stParam);
-        extern "C" __declspec(dllimport) void   XL_SetSpeedLimit(INT32 nKBps);
-        extern "C" __declspec(dllimport) void   XL_SetUploadSpeedLimit(INT32 nTcpKBps,INT32 nOtherKBps);
-        extern "C" __declspec(dllimport) BOOL   XL_SetProxy(DOWN_PROXY_INFO &stProxyInfo);
-        extern "C" __declspec(dllimport) void   XL_SetUserAgent(const wchar_t *pszUserAgent);
-        extern "C" __declspec(dllimport) BOOL   XL_ParseThunderPrivateUrl(const wchar_t *pszThunderUrl, wchar_t *normalUrlBuffer, INT32 bufferLen);
-        extern "C" __declspec(dllimport) BOOL   XL_GetFileSizeWithUrl(const wchar_t * lpURL, INT64& iFileSize);
-        extern "C" __declspec(dllimport) BOOL   XL_SetFileIdAndSize(HANDLE hTask, char szFileId[40], unsigned __int64 nFileSize);
-        extern "C" __declspec(dllimport) BOOL   XL_SetAdditionInfo( HANDLE task_id, WSAPROTOCOL_INFOW *sock_info, CHAR *http_resp_buf, LONG buf_len );
-        extern "C" __declspec(dllimport) HANDLE XL_CreateTaskByURL(const wchar_t *url, const wchar_t *path, const wchar_t *fileName, BOOL IsResume);
-        extern "C" __declspec(dllimport) LONG   XL_CreateTaskByThunder(wchar_t *pszUrl, wchar_t *pszFileName, wchar_t *pszReferUrl, wchar_t *pszCharSet, wchar_t *pszCookie);
-        extern "C" __declspec(dllimport) LONG   XL_CreateBTTaskByThunder(const wchar_t *pszPath);
-    };
-}
+};
+
+
+
+namespace DownEngine
+{
+    /*
+    全局接口
+        接口名称	功能说明
+        XL_Init	初始化SDK，并使其为处理后续操作做好准备。
+        XL_UnInit	反初始化SDK，释放模块运行期间申请的资源。
+        XL_DelTempFile	删除临时文件
+        XL_SetSpeedLimit	设置最大下载速度
+        XL_SetProxy	设置全局代理
+        XL_SetUserAgent	设置HTTP请求时客户端信息
+        XL_ParseThunderPrivateUrl	将迅雷专用链转成实际URL
+        XL_SetUploadSpeedLimit	限制上传速度
+        XL_CreateTaskByURL	简单封装了XL_CreateTask接口
+        XL_CreateTaskByThunder	拉起迅雷7创建下载任务
+        XL_ForceStopTask	强制暂停任务
+    任务接口
+        接口名称        功能说明
+        XL_CreateTask	创建任务
+        XL_DeleteTask	销毁任务
+        XL_StartTask	开始任务
+        XL_StopTask	停止任务
+        XL_QueryTaskInfoEx	查询任务信息
+        XL_SetThreadNum	设置原始链接线程数
+
+    */
+
+    extern "C" __declspec(dllimport) BOOL   XL_Init(void);
+    extern "C" __declspec(dllimport) BOOL   XL_UnInit(void);
+    extern "C" __declspec(dllimport) HANDLE XL_CreateTask(DownTaskParam &stParam);
+    extern "C" __declspec(dllimport) BOOL   XL_DeleteTask(HANDLE hTask);
+    extern "C" __declspec(dllimport) BOOL   XL_StartTask(HANDLE hTask);
+    extern "C" __declspec(dllimport) BOOL   XL_StopTask(HANDLE hTask);
+    extern "C" __declspec(dllimport) BOOL   XL_ForceStopTask(HANDLE hTask);
+    extern "C" __declspec(dllimport) BOOL   XL_QueryTaskInfo(HANDLE hTask, DownTaskInfo & stTaskInfo); //旧版接口，使用Ex接口替换
+    extern "C" __declspec(dllimport) BOOL   XL_QueryTaskInfoEx(HANDLE hTask, DownTaskInfo & stTaskInfo);
+    extern "C" __declspec(dllimport) BOOL   XL_DelTempFile(DownTaskParam &stParam);
+    extern "C" __declspec(dllimport) void   XL_SetSpeedLimit(INT32 nKBps);
+    extern "C" __declspec(dllimport) void   XL_SetUploadSpeedLimit(INT32 nTcpKBps,INT32 nOtherKBps);
+    extern "C" __declspec(dllimport) BOOL   XL_SetProxy(DOWN_PROXY_INFO &stProxyInfo);
+    extern "C" __declspec(dllimport) void   XL_SetUserAgent(const wchar_t *pszUserAgent);
+    extern "C" __declspec(dllimport) BOOL   XL_ParseThunderPrivateUrl(const wchar_t *pszThunderUrl, wchar_t *normalUrlBuffer, INT32 bufferLen);
+    extern "C" __declspec(dllimport) BOOL   XL_GetFileSizeWithUrl(const wchar_t * lpURL, INT64& iFileSize);
+    extern "C" __declspec(dllimport) BOOL   XL_SetFileIdAndSize(HANDLE hTask, char szFileId[40], unsigned __int64 nFileSize);
+    extern "C" __declspec(dllimport) BOOL   XL_SetAdditionInfo( HANDLE task_id, WSAPROTOCOL_INFOW *sock_info, CHAR *http_resp_buf, LONG buf_len );
+    extern "C" __declspec(dllimport) HANDLE XL_CreateTaskByURL(const wchar_t *url, const wchar_t *path, const wchar_t *fileName, BOOL IsResume);
+    extern "C" __declspec(dllimport) HANDLE XL_CreateTaskByThunder(wchar_t *pszUrl, wchar_t *pszFileName, wchar_t *pszReferUrl, wchar_t *pszCharSet, wchar_t *pszCookie);
+    extern "C" __declspec(dllimport) HANDLE XL_CreateBTTaskByThunder(const wchar_t *pszPath);
+};
+

@@ -1,7 +1,19 @@
+﻿/** 
+* @license          : MIT
+* @projectName      : MyMiniThunder 
+* @fileName         : DownWrapper.h
+* @author           : Yzl
+* @makeFileDate     : 2018-11-03 
+* @lastModify       : // 最后修改
+* @brief            : 全文使用Unicode编码, 不支持Ansi编码编辑项目, 
+*                     项目基于 https://github.com/intlinfo/MiniThunder 
+*/
+
 #include "DownWrapper.h"
 
 namespace DownEngine
 {
+    
 
     CDownWrapper::CDownWrapper()
     {
@@ -9,12 +21,12 @@ namespace DownEngine
     }
 
     
-    BOOL CDownWrapper::InitEngine(LPCWSTR sPath) throw(TSTRING)
+    BOOL CDownWrapper::InitEngine(LPCWSTR sPath) throw(WSTRING)
     {
         m_hModule = LoadLibraryW(sPath);
         if (m_hModule == NULL)
         {
-            throw TSTRING(TEXT("can not load xldl.dll"));
+            throw WSTRING(L"can not load xldl.dll");
         }
         // WCHAR szModulePath[MAX_PATH] = { 0 };
         // GetModuleFileNameW(NULL, szModulePath, MAX_PATH);
@@ -128,11 +140,11 @@ namespace DownEngine
     {
         CHECKFUNC(m_CreateTaskByURL, FALSE); return m_CreateTaskByURL(url, path, fileName, IsResume);
     }
-    LONG CDownWrapper::CreateTaskByThunder(wchar_t *pszUrl, wchar_t *pszFileName, wchar_t *pszReferUrl, wchar_t *pszCharSet, wchar_t *pszCookie)
+    HANDLE CDownWrapper::CreateTaskByThunder(wchar_t *pszUrl, wchar_t *pszFileName, wchar_t *pszReferUrl, wchar_t *pszCharSet, wchar_t *pszCookie)
     {
         CHECKFUNC(m_CreateTaskByThunder, FALSE); return m_CreateTaskByThunder(pszUrl, pszFileName, pszReferUrl, pszCharSet, pszCookie);
     }
-    LONG CDownWrapper::CreateBTTaskByThunder(const wchar_t *pszPath)
+    HANDLE CDownWrapper::CreateBTTaskByThunder(const wchar_t *pszPath)
     {
         CHECKFUNC(m_CreateBTTaskByThunder, FALSE); return m_CreateBTTaskByThunder(pszPath);
     }
@@ -144,5 +156,97 @@ namespace DownEngine
         wcscpy(TaskParam.szFilename, Filename);
         wcscpy(TaskParam.szSavePath, SavePath);
         return TaskParam;
+    }
+    WSTRING CDownWrapper::ConvertErrcodeToErrString(TASK_ERROR_TYPE status)
+    {   
+        WSTRING strResult = L"";
+        switch (status)
+        {
+            case TASK_ERROR_UNKNOWN:
+            {
+                strResult = L"未知错误";
+                break;
+            }
+            case TASK_ERROR_DISK_CREATE:
+            {
+                strResult = L"创建文件失败";
+                break;
+            }
+            case TASK_ERROR_DISK_WRITE:
+            {
+                strResult = L"写文件失败";
+                break;
+            }
+            case TASK_ERROR_DISK_READ:
+            {
+                strResult = L"读文件失败";
+                break;
+            }
+            case TASK_ERROR_DISK_RENAME:
+            {
+                strResult = L"重命名失败";
+                break;
+            }
+            case TASK_ERROR_DISK_PIECEHASH:
+            {
+                strResult = L"文件片校验失败";
+                break;
+            }
+            case TASK_ERROR_DISK_FILEHASH:
+            {
+                strResult = L"文件全文校验失败";
+                break;
+            }
+            case TASK_ERROR_DISK_DELETE:
+            {
+                strResult = L"删除文件失败失败";
+                break;
+            }
+            case TASK_ERROR_DOWN_INVALID:
+            {
+                strResult = L"无效的更新地址";
+                break;
+            }
+            case TASK_ERROR_PROXY_AUTH_TYPE_UNKOWN:
+            {
+                strResult = L"代理类型未知";
+                break;
+            }
+            case TASK_ERROR_PROXY_AUTH_TYPE_FAILED:
+            {
+                strResult = L"代理认证失败";
+                break;
+            }
+            case TASK_ERROR_HTTPMGR_NOT_IP:
+            {
+                strResult = L"更新中无可用资源";
+                break;
+            }
+            case TASK_ERROR_TIMEOUT:
+            {
+                strResult = L"更新任务超时";
+                break;
+            }
+            case TASK_ERROR_CANCEL:
+            {
+                strResult = L"更新任务取消";
+                break;
+            }
+            case TASK_ERROR_TP_CRASHED:
+            {
+                strResult = L"MINITP崩溃";
+                break;
+            }
+            case TASK_ERROR_ID_INVALID:
+            {
+                strResult = L"TaskId 非法";
+                break;
+            }
+            default:
+                strResult = L"未知错误, 无法得知错误类型!";
+                break;
+        }
+        
+        return strResult;
     }
 };

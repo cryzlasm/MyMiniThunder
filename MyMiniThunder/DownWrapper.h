@@ -1,4 +1,21 @@
+﻿/** 
+* @license          : MIT
+* @projectName      : MyMiniThunder 
+* @fileName         : DownWrapper.h
+* @author           : Yzl
+* @makeFileDate     : 2018-11-03 
+* @lastModify       : // 最后修改
+* @brief            : 全文使用Unicode编码, 不支持Ansi编码编辑项目, 
+*                     项目基于 https://github.com/intlinfo/MiniThunder 
+*/
+
+
 #pragma once
+
+#ifndef UNICODE
+#define UNICODE
+#endif
+
 #include "./xldl.h"
 
 #define DEF_DETOUR_FUNC( func, returntype, ...) typedef returntype ( * fn_##func )(##__VA_ARGS__); fn_##func m_##func;
@@ -6,15 +23,12 @@
 #define CHECKFUNC(f, ret) if (f == NULL) return ret;
 #define CHECKFUNC_(f) if (f == NULL) return;
 
-#include <TCHAR.H>
+
+
 #include <STRING>
 #include <string.h>
-#ifdef UNICODE
-    #define TSTRING std::wstring
+#define WSTRING std::wstring
 
-#else
-    #define TSTRING std::string
-#endif
 
 
 namespace DownEngine
@@ -24,10 +38,10 @@ namespace DownEngine
     {
     public:
         
-
+        static WSTRING ConvertErrcodeToErrString(TASK_ERROR_TYPE status);
         CDownWrapper();
         virtual ~CDownWrapper() ;
-        BOOL InitEngine(LPCWSTR sPath) throw( TSTRING );
+        BOOL InitEngine(LPCWSTR sPath) throw( WSTRING );
         BOOL UnEngine();
         
         HANDLE TaskCreate(DownTaskParam &param);
@@ -47,8 +61,8 @@ namespace DownEngine
         BOOL SetFileIdAndSize(HANDLE hTask, char szFileId[40], unsigned __int64 nFileSize);
         BOOL SetAdditionInfo(HANDLE task_id, WSAPROTOCOL_INFOW *sock_info, CHAR *http_resp_buf, LONG buf_len);
         HANDLE CreateTaskByURL(const wchar_t *url, const wchar_t *path, const wchar_t *fileName, BOOL IsResume);
-        LONG CreateTaskByThunder(wchar_t *pszUrl, wchar_t *pszFileName, wchar_t *pszReferUrl, wchar_t *pszCharSet, wchar_t *pszCookie);
-        LONG CreateBTTaskByThunder(const wchar_t *pszPath);
+        HANDLE CreateTaskByThunder(wchar_t *pszUrl, wchar_t *pszFileName, wchar_t *pszReferUrl, wchar_t *pszCharSet, wchar_t *pszCookie);
+        HANDLE CreateBTTaskByThunder(const wchar_t *pszPath);
         DownTaskParam CreateDownTaskParam(const wchar_t TaskUrl[], const wchar_t Filename[], const wchar_t SavePath[], BOOL IsResume = TRUE, BOOL IsOnlyOriginal = FALSE, BOOL DisableAutoRename = FALSE);
     private:
         HMODULE                                 m_hModule;
@@ -71,7 +85,7 @@ namespace DownEngine
         DEF_DETOUR_FUNC(SetFileIdAndSize,       BOOL,       HANDLE hTask, char szFileId[40], unsigned __int64 nFileSize);
         DEF_DETOUR_FUNC(SetAdditionInfo,        BOOL,       HANDLE task_id, WSAPROTOCOL_INFOW *sock_info, CHAR *http_resp_buf, LONG buf_len);
         DEF_DETOUR_FUNC(CreateTaskByURL,        HANDLE,     const wchar_t *url, const wchar_t *path, const wchar_t *fileName, BOOL IsResume);
-        DEF_DETOUR_FUNC(CreateTaskByThunder,    LONG,       wchar_t *pszUrl, wchar_t *pszFileName, wchar_t *pszReferUrl, wchar_t *pszCharSet, wchar_t *pszCookie);
-        DEF_DETOUR_FUNC(CreateBTTaskByThunder,  LONG,       const wchar_t *pszPath);
+        DEF_DETOUR_FUNC(CreateTaskByThunder,    HANDLE,     wchar_t *pszUrl, wchar_t *pszFileName, wchar_t *pszReferUrl, wchar_t *pszCharSet, wchar_t *pszCookie);
+        DEF_DETOUR_FUNC(CreateBTTaskByThunder,  HANDLE,     const wchar_t *pszPath);
     };
 };
