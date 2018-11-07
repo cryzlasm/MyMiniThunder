@@ -7,11 +7,6 @@
 Ref:
 [缓存:ThunderOpenSDK](https://github.com/cryzlasm/ThunderOpenSDK) : [https://github.com/cryzlasm/ThunderOpenSDK]
 
----
-
-# 简介
-<span data-type="color" style="color:rgb(51, 51, 51)">某一天, 我更新了我的WIN10系统, 更新之后, 我的 迅雷极速版/mini迅雷/迅雷5 等, 均会莫名的崩溃, 刚好在那个时间节点, 发现360极速浏览器的下载, 使用的事迅雷下载引擎, 激发了了解迅雷开放引擎的兴趣, 所以准备编写自己的下载器, 顺带练手(主要是练手)</span>
-
 当前项目基于  [MiniThunder](https://github.com/intlinfo/MiniThunder) 开源项目的二次开发
 
 
@@ -21,6 +16,15 @@ Ref:
 
 
 ![image | left](https://cdn.nlark.com/yuque/0/2018/png/172196/1537420858505-f6fec75f-562d-4734-bce7-7e48597ede71.png "")
+
+
+
+---
+
+# 简介
+<span data-type="color" style="color:rgb(51, 51, 51)"><del>某一天, 我更新了我的WIN10系统, 更新之后, 我的 迅雷极速版/mini迅雷/迅雷5 等, 均会莫名的崩溃, 刚好在那个时间节点, 发现360极速浏览器的下载, 使用的事迅雷下载引擎, 激发了了解迅雷开放引擎的兴趣, 所以准备编写自己的下载器, 顺带练手(主要是练手)</del></span>
+__在简单功能编写结束之后, 发现此SDK仅支持HTTP/HTTPS/FTP等下载, 在调用BT下载时, 无法启动下载, 经查询文档, 得知: API 接口仅是启动迅雷客户端进行BT下载.__ 
+__由于仅为闲暇练习之作, 故暂不再深究此项目. 进行项目暂存.__   
 
 
 
